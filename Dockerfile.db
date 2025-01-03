@@ -1,4 +1,6 @@
-FROM postgres:9.6.15-alpine
+FROM postgres:12-alpine
 
 ENV POSTGRES_DB sqli
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD postgres
 COPY ./migrations/* /docker-entrypoint-initdb.d/
