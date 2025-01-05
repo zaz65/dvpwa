@@ -9,7 +9,7 @@ idna==3.10                 # via yarl
 jinja2==3.1.5              # via aiohttp-jinja2
 markupsafe==3.0.2         # via jinja2
 multidict==6.1.0          # via aiohttp, yarl
-psycopg2==2.9.10         # via aiopg
+psycopg2-binary==2.9.10         # via aiopg
 pyyaml==6.0.2
 redis
 trafaret-config==2.0.2
