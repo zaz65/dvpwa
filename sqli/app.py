@@ -4,6 +4,8 @@ from aiohttp.web import Application
 from aiohttp_jinja2 import setup as setup_jinja
 from jinja2.loaders import PackageLoader
 from trafaret_config import commandline
+import logging
+import os
 
 from sqli.middlewares import session_middleware, error_middleware
 from sqli.schema.config import CONFIG_SCHEMA
@@ -18,7 +20,14 @@ def init(argv):
     commandline.standard_argparse_options(ap, default_config='./config/dev.yaml')
     options = ap.parse_args(argv)
 
+    logging.basicConfig(level=os.getenv('LOG_LEVEL', 'INFO'))
+    log = logging.getLogger(__name__)  # __name__ is my_service.app, it will only log messages from this module
+
+    # Get config from default dict settings (dev.yaml)
     config = commandline.config_from_options(options, CONFIG_SCHEMA)
+
+    log.info (">> Config Data")
+    log.info (config)
 
     app = Application(
         debug=True,
